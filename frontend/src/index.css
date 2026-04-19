@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-white text-dark m-0 p-0 overflow-hidden;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-green-100;
+  }
+}
+
+/* Leaflet Overrides */
+.leaflet-container {
+  background: #242424 !important;
+}
+
+.leaflet-tooltip-pane .leaflet-tooltip {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Custom Tooltip style for Pest Labels */
+.pest-tooltip {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Animations */
+@keyframes scanLine {
+  0% { top: 0; }
+  100% { top: 100%; }
+}
+
+.animate-scan-line {
+  animation: scanLine 2s linear infinite;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out forwards;
+}
+
+/* Radar Animation */
+@keyframes radar-pulse {
+  0% { transform: scale(0.1); opacity: 0.8; }
+  80% { transform: scale(1.2); opacity: 0; }
+  100% { transform: scale(1.2); opacity: 0; }
+}
+
+.animate-radar {
+  transform-origin: center;
+  animation: radar-pulse 3s ease-out infinite;
+}
+
+/* Pulse for pest icons */
+@keyframes pulse-red {
+  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+.animate-pulse {
+  animation: pulse-red 2s infinite;
+}
+
+/* Flow Animation for Irrigation Lines */
+@keyframes flow {
+  from { stroke-dashoffset: 20; }
+  to { stroke-dashoffset: 0; }
+}
+
+.animate-flow {
+  stroke-dasharray: 10, 5;
+  animation: flow 1s linear infinite;
+}
