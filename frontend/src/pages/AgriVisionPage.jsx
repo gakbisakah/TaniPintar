@@ -1,5 +1,5 @@
 import React from 'react';
-import AgriVision from '../components/AgriVision';
+import AgriVision from '../features/agri-vision/components/AgriVision';
 
 const AgriVisionPage = () => {
   return <AgriVision />;

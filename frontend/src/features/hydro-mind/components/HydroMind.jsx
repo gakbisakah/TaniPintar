@@ -14,34 +14,22 @@ const HydroMind = () => {
     { name: 'HydroMind', value: 111, color: '#047857', label: '111m³' }
   ];
 
-  // Jaringan Irigasi yang lebih padat dan kompleks
   const pipeLines = [
-    // Jalur Utama (Main Supply)
     [[-6.760, 107.760], [-6.770, 107.765], [-6.775, 107.770], [-6.785, 107.775]],
     [[-6.770, 107.765], [-6.765, 107.775], [-6.770, 107.785], [-6.768, 107.795]],
-
-    // Grid Sawah Wayan
     [[-6.765, 107.775], [-6.763, 107.772]],
     [[-6.764, 107.774], [-6.762, 107.778]],
     [[-6.766, 107.776], [-6.764, 107.780]],
-
-    // Grid Lahan Sukardaj
     [[-6.772, 107.780], [-6.775, 107.785]],
     [[-6.773, 107.782], [-6.771, 107.784]],
     [[-6.774, 107.783], [-6.772, 107.786]],
-
-    // Jalur Distribusi Samping
     [[-6.770, 107.765], [-6.762, 107.768]],
     [[-6.775, 107.770], [-6.775, 107.755]],
     [[-6.780, 107.772], [-6.785, 107.765]],
     [[-6.782, 107.778], [-6.786, 107.782]],
-
-    // Grid Kebun Cimalaka
     [[-6.768, 107.795], [-6.772, 107.798]],
     [[-6.769, 107.796], [-6.767, 107.800]],
     [[-6.770, 107.797], [-6.773, 107.802]],
-
-    // Koneksi Antar Blok
     [[-6.775, 107.770], [-6.772, 107.780]],
     [[-6.765, 107.775], [-6.770, 107.765]]
   ];
@@ -53,12 +41,9 @@ const HydroMind = () => {
           <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}" attribution='&copy; Esri' />
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" opacity={0.15} />
 
-          {/* Animasi Aliran Air Bergerak (Data Visual) */}
           {pipeLines.map((line, idx) => (
             <React.Fragment key={idx}>
-              {/* Background Pipe (Statik) */}
               <Polyline positions={line} pathOptions={{ color: '#1e3a8a', weight: 5, opacity: 0.15, lineJoin: 'round' }} />
-              {/* Animated Flow (Bergerak) */}
               <Polyline
                 positions={line}
                 className="animate-flow"
@@ -78,7 +63,6 @@ const HydroMind = () => {
           <Marker position={[-6.769, 107.795]} icon={L.divIcon({ className: '', html: '<div class="text-[8px] font-black text-white drop-shadow-lg text-center bg-green-900/40 px-1.5 py-0.5 rounded backdrop-blur-[1px]">KEBUN CIMALAKA</div>' })} />
         </MapContainer>
 
-        {/* Floating Weather/Warning Alert */}
         <div className="absolute top-4 right-4 z-[1000] pointer-events-none">
            <div className="bg-orange-600/90 backdrop-blur-md rounded-xl p-2.5 px-3 border border-orange-400/50 shadow-2xl text-white flex items-center gap-2 animate-pulse">
               <AlertTriangle className="w-3.5 h-3.5" />
@@ -86,18 +70,14 @@ const HydroMind = () => {
            </div>
         </div>
 
-        {/* Floating Map Utility Buttons */}
         <div className="absolute left-4 top-1/2 -translate-y-1/2 z-[1000] flex flex-col gap-3">
            <button className="bg-white/70 backdrop-blur-md p-2 rounded-xl shadow-lg border border-white/50 active:scale-90 transition-transform"><Layers className="w-4 h-4 text-gray-700" /></button>
            <button className="bg-white/70 backdrop-blur-md p-2 rounded-xl shadow-lg border border-white/50 active:scale-90 transition-transform"><Navigation className="w-4 h-4 text-gray-700" /></button>
         </div>
       </div>
 
-      {/* Mini Dashboard Card - Super Thin & Smart */}
       <div className="fixed bottom-24 left-4 right-4 z-[1001] pointer-events-none">
         <div className="bg-white/80 backdrop-blur-3xl rounded-[24px] p-3 shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-white/60 pointer-events-auto overflow-hidden transition-all duration-500">
-
-          {/* Collapsed Header Area */}
           <div className="flex items-center justify-between cursor-pointer px-1" onClick={() => setIsExpanded(!isExpanded)}>
              <div className="flex items-center gap-3">
                 <div className="flex flex-col items-center justify-center bg-emerald-700 text-white w-9 h-9 rounded-xl shadow-lg">
@@ -129,10 +109,7 @@ const HydroMind = () => {
              </div>
           </div>
 
-          {/* Expandable Content Area */}
           <div className={`transition-all duration-500 ease-in-out overflow-hidden ${isExpanded ? 'max-h-80 mt-3 opacity-100 border-t border-gray-100/50 pt-3' : 'max-h-0 opacity-0'}`}>
-
-             {/* Chart Legend & Stats */}
              <div className="flex justify-between items-center mb-3 px-1">
                 <div className="flex gap-3">
                    <div className="flex items-center gap-1"><div className="w-2 h-2 bg-gray-400 rounded-full"></div><span className="text-[8px] font-bold text-gray-400 uppercase">Biasa</span></div>
@@ -144,7 +121,6 @@ const HydroMind = () => {
              </div>
 
              <div className="h-28 w-full relative mb-4">
-                {/* Visual Connection "HEMAT 40%" */}
                 <div className="absolute top-0 left-[38%] right-[15%] h-5 border-t border-r border-dashed border-gray-300">
                    <span className="absolute -right-12 top-0 text-[8px] font-black text-emerald-800 tracking-tighter uppercase">Hemat 40%</span>
                 </div>
@@ -159,7 +135,6 @@ const HydroMind = () => {
                 </ResponsiveContainer>
              </div>
 
-             {/* Metric Grid */}
              <div className="grid grid-cols-4 gap-2">
                 <MiniCard label="Volume" value="[x] m³" color="text-emerald-700" />
                 <MiniCard label="ETc" value="4.8 mm" />

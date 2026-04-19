@@ -1,7 +1,9 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api',
+  // Menggunakan '/api' relatif agar otomatis menggunakan proxy saat dev
+  // dan routing Vercel saat production
+  baseURL: '/api',
   headers: { 'Content-Type': 'application/json' }
 });
 

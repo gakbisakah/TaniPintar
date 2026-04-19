@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Upload, Camera, Image, AlertCircle, RefreshCcw } from 'lucide-react';
-import api from '../services/api';
+import api from '../../../services/api';
 
 const AgriVision = () => {
   const [selectedImage, setSelectedImage] = useState(null);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { MapContainer, TileLayer, Circle, Marker, Tooltip } from 'react-leaflet';
 import L from 'leaflet';
 import { AlertTriangle, Bug, ChevronUp } from 'lucide-react';
@@ -27,26 +27,24 @@ const userIcon = L.divIcon({
 
 const PestAlert = () => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const center = [-6.77, 107.77]; // Koordinat sample area (sekitar Subang/Sumedang sesuai gambar)
+  const center = [-6.77, 107.77];
 
   const pestLocations = [
     { id: 1, pos: [-6.775, 107.765], label: '1.8km lalu' },
     { id: 2, pos: [-6.765, 107.785], label: 'Baru Saja' },
     { id: 3, pos: [-6.785, 107.780], label: '2.1 km' },
     { id: 4, pos: [-6.790, 107.770], label: '2.1km lalu' },
-    { id: 5, pos: [-6.770, 107.755], label: 'Baru Saja' },
+    { id: 5, pos: [-6.770, 107.55], label: 'Baru Saja' },
   ];
 
   return (
     <div className="relative h-full w-full bg-gray-100 overflow-hidden flex flex-col">
-      {/* Radar Text Header Overlay */}
       <div className="absolute top-4 left-0 right-0 z-[1000] flex justify-center pointer-events-none">
         <div className="bg-red-600/90 backdrop-blur-md text-white text-[10px] font-bold px-4 py-1.5 rounded-full shadow-lg border border-red-400/50 tracking-wider uppercase">
           RADIUS WASPADA 5km - PestAlert Community
         </div>
       </div>
 
-      {/* Map Content */}
       <div className="flex-grow z-0">
         <MapContainer
           center={center}
@@ -90,10 +88,8 @@ const PestAlert = () => {
         </MapContainer>
       </div>
 
-      {/* Notification Card Overlay - Optimized and Compact */}
       <div className={`absolute left-4 right-4 z-[1000] transition-all duration-500 ease-in-out ${isExpanded ? 'bottom-32' : 'bottom-32'}`}>
         <div className="bg-white/80 backdrop-blur-2xl rounded-3xl p-4 shadow-2xl border border-white/50 relative overflow-hidden">
-          {/* Header Area - Always visible */}
           <div className="flex items-center justify-between cursor-pointer" onClick={() => setIsExpanded(!isExpanded)}>
              <div className="flex items-center gap-3">
                 <div className="bg-yellow-100 p-1.5 rounded-xl">
@@ -109,7 +105,6 @@ const PestAlert = () => {
              <ChevronUp className={`w-5 h-5 text-gray-400 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
           </div>
 
-          {/* Expandable Content */}
           <div className={`transition-all duration-500 ease-in-out overflow-hidden ${isExpanded ? 'max-h-80 mt-4 opacity-100' : 'max-h-0 opacity-0'}`}>
              <div className="space-y-3 mb-4">
                 <div className="text-[11px] text-gray-600 space-y-1">
