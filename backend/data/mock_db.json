@@ -1,0 +1,29 @@
+{
+  "pest_reports": [
+    {
+      "id": 1001,
+      "lat": -6.2,
+      "lon": 106.816,
+      "pest_type": "Wereng Batang Coklat",
+      "severity": "high",
+      "timestamp": "2026-04-15T08:30:00",
+      "reported_by": "farmer_001"
+    },
+    {
+      "id": 1002,
+      "lat": -6.21,
+      "lon": 106.82,
+      "pest_type": "Ulat Grayak",
+      "severity": "medium",
+      "timestamp": "2026-04-16T10:15:00",
+      "reported_by": "farmer_002"
+    }
+  ],
+  "carbon": {
+    "total_co2e": 125.5,
+    "farmers_contributions": [
+      { "user_id": "farmer_001", "total_credits": 12.3, "pending": 2.1, "co2_saved": 12300 },
+      { "user_id": "farmer_002", "total_credits": 8.7, "pending": 1.5, "co2_saved": 8700 }
+    ]
+  }
+}
