@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Circle, Marker, Tooltip } from 'react-leaflet';
 import L from 'leaflet';
 import { AlertTriangle, Bug, ChevronUp } from 'lucide-react';
@@ -27,7 +27,13 @@ const userIcon = L.divIcon({
 
 const PestAlert = () => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [showMap, setShowMap] = useState(false);
   const center = [-6.77, 107.77];
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowMap(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
 
   const pestLocations = [
     { id: 1, pos: [-6.775, 107.765], label: '1.8km lalu' },
@@ -46,49 +52,44 @@ const PestAlert = () => {
       </div>
 
       <div className="flex-grow z-0">
-        <MapContainer
-          center={center}
-          zoom={14}
-          zoomControl={false}
-          style={{ height: '100%', width: '100%' }}
-        >
-          <TileLayer
-            url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
-            attribution='&copy; Esri'
-          />
-          <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            opacity={0.3}
-          />
-
-          <Marker position={center} icon={userIcon} />
-
-          <Circle
+        {showMap && (
+          <MapContainer
             center={center}
-            radius={5000}
-            pathOptions={{ color: 'red', weight: 2, fillColor: 'red', fillOpacity: 0.1 }}
-          />
+            zoom={14}
+            zoomControl={false}
+            style={{ height: '100%', width: '100%' }}
+          >
+            <TileLayer
+              url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+              attribution='&copy; Esri'
+            />
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              opacity={0.3}
+            />
 
-          <Circle
-            center={center}
-            radius={2500}
-            className="animate-radar"
-            pathOptions={{ color: 'red', weight: 1, fillColor: 'transparent' }}
-          />
+            <Marker position={center} icon={userIcon} />
 
-          {pestLocations.map(pest => (
-            <Marker key={pest.id} position={pest.pos} icon={createPestIcon()}>
-               <Tooltip permanent direction="bottom" offset={[0, 10]} className="pest-tooltip">
-                  <span className="text-[9px] font-bold text-gray-800 bg-white/90 px-2 py-0.5 rounded-full border border-gray-200 shadow-sm">
-                    {pest.label}
-                  </span>
-               </Tooltip>
-            </Marker>
-          ))}
-        </MapContainer>
+            <Circle
+              center={center}
+              radius={5000}
+              pathOptions={{ color: 'red', weight: 2, fillColor: 'red', fillOpacity: 0.1 }}
+            />
+
+            {pestLocations.map(pest => (
+              <Marker key={pest.id} position={pest.pos} icon={createPestIcon()}>
+                 <Tooltip permanent direction="bottom" offset={[0, 10]} className="pest-tooltip">
+                    <span className="text-[9px] font-bold text-gray-800 bg-white/90 px-2 py-0.5 rounded-full border border-gray-200 shadow-sm">
+                      {pest.label}
+                    </span>
+                 </Tooltip>
+              </Marker>
+            ))}
+          </MapContainer>
+        )}
       </div>
 
-      <div className={`absolute left-4 right-4 z-[1000] transition-all duration-500 ease-in-out ${isExpanded ? 'bottom-32' : 'bottom-32'}`}>
+      <div className={`absolute left-4 right-4 z-[1000] transition-all duration-500 ease-in-out bottom-32`}>
         <div className="bg-white/80 backdrop-blur-2xl rounded-3xl p-4 shadow-2xl border border-white/50 relative overflow-hidden">
           <div className="flex items-center justify-between cursor-pointer" onClick={() => setIsExpanded(!isExpanded)}>
              <div className="flex items-center gap-3">

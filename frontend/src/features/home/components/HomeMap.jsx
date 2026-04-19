@@ -126,28 +126,45 @@ const HomeMap = () => {
           .leaflet-tooltip-pane .plot-tooltip::before {
             display: none !important;
           }
+          /* Custom Zoom Controls */
+          .leaflet-control-zoom {
+            border: none !important;
+            margin-left: 16px !important;
+            margin-top: 16px !important;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15) !important;
+          }
+          .leaflet-control-zoom-in, .leaflet-control-zoom-out {
+            background-color: white !important;
+            color: #1f2937 !important;
+            width: 36px !important;
+            height: 36px !important;
+            line-height: 36px !important;
+            font-size: 18px !important;
+            font-weight: bold !important;
+            border-radius: 12px !important;
+          }
+          .leaflet-control-zoom-in {
+            margin-bottom: 4px !important;
+          }
         `}
       </style>
 
       {/* Weather Card */}
-      <div className="absolute top-4 right-4 z-[1000] bg-white/90 backdrop-blur-md p-3 rounded-2xl shadow-xl border border-white/50 w-48 pointer-events-auto">
+      <div className="absolute top-4 right-4 z-[1000] bg-white/90 backdrop-blur-md p-3 rounded-2xl shadow-xl border border-white/50 w-44 pointer-events-auto">
         <div className="flex justify-between items-center mb-1">
-          <span className="text-[11px] font-bold text-gray-800 tracking-wider">BMKG</span>
-          <img src="https://warning.bmkg.go.id/img/bg.png" alt="BMKG" className="h-9 object-contain" />
+          <span className="text-[10px] font-bold text-gray-800 tracking-wider">BMKG</span>
+          <img src="https://warning.bmkg.go.id/img/bg.png" alt="BMKG" className="h-7 object-contain" />
         </div>
 
         <div className="flex items-center gap-2 mb-1">
-          <Sun className="w-9 h-9 text-yellow-500 fill-yellow-100" />
-          <span className="text-3xl font-black text-gray-800 tracking-tighter">30°C</span>
+          <Sun className="w-8 h-8 text-yellow-500 fill-yellow-100" />
+          <span className="text-2xl font-black text-gray-800 tracking-tighter">30°C</span>
         </div>
 
-        <div className="space-y-1.5 pt-1 border-t border-gray-100">
-          <p className="text-[11px] font-bold text-gray-700">
-            Medan, North Sumatra
-          </p>
-          <div className="text-[10px] leading-tight text-gray-500">
-            <span className="font-bold text-gray-400 block mb-0.5 uppercase tracking-wide text-[8px]">BMKG Forecast:</span>
-            Hujan Ringan (60% Probabilitas)
+        <div className="space-y-1 pt-1 border-t border-gray-100">
+          <p className="text-[10px] font-bold text-gray-700">Medan, North Sumatra</p>
+          <div className="text-[9px] leading-tight text-gray-500">
+            Hujan Ringan (60%)
           </div>
         </div>
       </div>
@@ -164,7 +181,7 @@ const HomeMap = () => {
             attribution='&copy; Esri'
           />
 
-          <ZoomControl position="bottomright" />
+          <ZoomControl position="topleft" />
 
           {plots.map(plot => (
             <Polygon
